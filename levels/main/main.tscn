@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://lde6qv8e00am"]
+
+[ext_resource type="PackedScene" uid="uid://c7v2lro4dpn22" path="res://common/player/player.tscn" id="1_f6gjy"]
+[ext_resource type="PackedScene" uid="uid://bsqt1nvlh4kev" path="res://levels/course/course.tscn" id="3_iab0w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f6gjy"]
+size = Vector3(60, 1, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gonaa"]
+albedo_color = Color(0.42, 0.44, 0.46, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iab0w"]
+material = SubResource("StandardMaterial3D_gonaa")
+size = Vector3(60, 1, 60)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3ymrs"]
+
+[sub_resource type="Sky" id="Sky_q42nm"]
+sky_material = SubResource("ProceduralSkyMaterial_3ymrs")
+
+[sub_resource type="Environment" id="Environment_oclhf"]
+background_mode = 2
+sky = SubResource("Sky_q42nm")
+tonemap_mode = 2
+
+[node name="Node3D" type="Node3D" unique_id=1960857805]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=817201416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=161838417]
+shape = SubResource("BoxShape3D_f6gjy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=6732188]
+mesh = SubResource("BoxMesh_iab0w")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=951353065]
+transform = Transform3D(0.8660254, -0.38302222, 0.32139382, 0, 0.64278764, 0.76604444, -0.5, -0.66341394, 0.5566704, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1056890458]
+environment = SubResource("Environment_oclhf")
+
+[node name="Player" parent="." unique_id=830533130 instance=ExtResource("1_f6gjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Course" parent="." unique_id=1306361224 instance=ExtResource("3_iab0w")]
+
+[node name="LedgeView" type="Camera3D" parent="." unique_id=1686547025]
+transform = Transform3D(-1, 0, 0, 0, 0.92124957, 0.388972, 0, 0.388972, -0.92124957, -5, 2.6, -8.5)
